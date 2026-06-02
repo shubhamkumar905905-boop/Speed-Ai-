@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Generator - Speed AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-lightning-bolt"></i>
+                <span>Speed AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="image-generator.html">Image Generator</a></li>
+                <li><a href="video-generator.html" class="active">Video Generator</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="dashboard.html" class="btn-login">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>AI Video Generator</h1>
+        <p>Transform your ideas into stunning 4K/8K videos instantly</p>
+    </section>
+
+    <!-- Generator Container -->
+    <section class="generator-container">
+        <div class="generator-main">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2>Create Your Video</h2>
+                <textarea 
+                    id="videoPrompt" 
+                    class="prompt-input" 
+                    placeholder="Describe your video... (e.g., 'A cinematic drone flight over snow-covered mountains at sunset, 4K, smooth motion')"
+                    rows="6"
+                ></textarea>
+                
+                <!-- Settings -->
+                <div class="settings-grid">
+                    <div class="setting-group">
+                        <label for="videoResolution">Resolution</label>
+                        <select id="videoResolution" class="form-select">
+                            <option value="1080">1080p (Full HD)</option>
+                            <option value="2160" selected>2160p (4K)</option>
+                            <option value="4320">4320p (8K)</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="duration">Duration</label>
+                        <select id="duration" class="form-select">
+                            <option value="5">5 seconds</option>
+                            <option value="10" selected>10 seconds</option>
+                            <option value="15">15 seconds</option>
+                            <option value="30">30 seconds</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="fps">FPS</label>
+                        <select id="fps" class="form-select">
+                            <option value="24">24 FPS (Cinematic)</option>
+                            <option value="30" selected>30 FPS</option>
+                            <option value="60">60 FPS (Smooth)</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="videoStyle">Style</label>
+                        <select id="videoStyle" class="form-select">
+                            <option value="cinematic" selected>Cinematic</option>
+                            <option value="documentary">Documentary</option>
+                            <option value="animation">Animation</option>
+                            <option value="music">Music Video</option>
+                            <option value="vlog">Vlog Style</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generateVideoBtn" class="btn btn-primary btn-large">
+                    <i class="fas fa-film"></i> Generate Video
+                </button>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <h2>Generated Videos</h2>
+                <div id="videoPreview" class="video-grid">
+                    <div class="placeholder-card">
+                        <i class="fas fa-video"></i>
+                        <p>Your generated videos will appear here</p>
+                    </div>
+                </div>
+                <div id="videoLoadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Creating your masterpiece video...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-section">
+            <h3>Recent Video Generations</h3>
+            <div id="videoHistoryList" class="history-list">
+                <p class="empty-state">No videos generated yet. Create your first video!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Speed AI</h4>
+                <p>Professional AI Image & Video Generation</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Speed AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="video-generator.js"></script>
+</body>
+</html>
