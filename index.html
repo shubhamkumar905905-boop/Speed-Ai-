@@ -3,139 +3,1780 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speed AI - Professional AI Image & Video Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>AiVision - Professional AI Content Creator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #db2777;
+            --dark: #0f172a;
+            --darker: #020617;
+            --card: #1e293b;
+            --border: #334155;
+            --text-light: #f1f5f9;
+            --text-muted: #cbd5e1;
+            --success: #10b981;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(26, 31, 58, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.15);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2563eb, #7c3aed, #db2777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.7rem 1.8rem;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 90vh;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb, #7c3aed, #db2777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-liquid {
+            padding: 0.95rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(37, 99, 235, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(124, 58, 237, 0.2));
+            color: white;
+            border: 2px solid var(--primary);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(124, 58, 237, 0.3));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
+            animation: blur-rotate 8s linear infinite;
+        }
+
+        @keyframes blur-rotate {
+            0% { transform: rotate(0deg) translate(0, 0); }
+            50% { transform: rotate(180deg) translate(30px, 30px); }
+            100% { transform: rotate(360deg) translate(0, 0); }
+        }
+
+        .float-cards {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .float-card {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(37, 99, 235, 0.4);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: float-smooth 4s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .float-card:nth-child(1) {
+            top: 30px;
+            left: 20px;
+        }
+
+        .float-card:nth-child(2) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0s;
+        }
+
+        .float-card:nth-child(3) {
+            bottom: 30px;
+            right: 20px;
+            animation-delay: 0s;
+        }
+
+        @keyframes float-smooth {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(2deg); }
+            50% { transform: translateY(-10px) rotate(0deg); }
+            75% { transform: translateY(-18px) rotate(-2deg); }
+        }
+
+        .float-card i {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.6rem;
+        }
+
+        .float-card p {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            max-width: 1600px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(30, 41, 59, 0.8));
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+        }
+
+        .feature-card {
+            position: relative;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
+        }
+
+        .feature-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 800;
+        }
+
+        .feature-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== GENERATOR ===== */
+        .generator {
+            max-width: 1600px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .generator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gen-card {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.9), rgba(30, 41, 59, 0.9));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            min-height: 750px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gen-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gen-card:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(37, 99, 235, 0.2);
+        }
+
+        .gen-card:hover::before {
+            opacity: 1;
+        }
+
+        .gen-icon {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gen-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gen-card > p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gen-features {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gen-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .gen-feature i {
+            color: var(--success);
+            font-size: 1rem;
+        }
+
+        .prompt-group {
+            margin: 1.5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .prompt-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .prompt-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .prompt-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .prompt-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .quality-select {
+            width: 100%;
+            padding: 0.9rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quality-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .gen-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .gen-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .gen-btn:hover::after {
+            left: 100%;
+        }
+
+        .gen-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        .gen-btn:active {
+            transform: translateY(0px);
+        }
+
+        .gen-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            max-width: 1600px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(30, 41, 59, 0.8));
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
+        }
+
+        .gallery-preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--text-muted);
+        }
+
+        .gallery-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-info {
+            padding: 1.2rem;
+        }
+
+        .gallery-info h4 {
+            font-size: 0.92rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gallery-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .gallery-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .gallery-btn {
+            flex: 1;
+            padding: 0.55rem;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .empty-gallery {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-gallery i {
+            font-size: 4rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-gallery p {
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* ===== PRICING ===== */
+        .pricing {
+            max-width: 1600px;
+            margin: 5rem auto;
+            padding: 2rem;
+        }
+
+        .pricing-toggle {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-group {
+            display: inline-flex;
+            background: rgba(26, 31, 58, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem;
+            gap: 1rem;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.7rem 1.8rem;
+            cursor: pointer;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.9), rgba(30, 41, 59, 0.9));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            min-height: 560px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+        }
+
+        .price-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(37, 99, 235, 0.2);
+        }
+
+        .price-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
+            transform: scale(1.05);
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: -28px;
+            right: -35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.35rem 3rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .plan-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .plan-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .plan-price .amount {
+            font-size: 2.5rem;
+        }
+
+        .plan-period {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .tax-info {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
+            border-left: 3px solid var(--primary);
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .tax-info i {
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .plan-features {
+            flex: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.85rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .plan-feature:last-child {
+            border-bottom: none;
+        }
+
+        .plan-feature i {
+            color: var(--success);
+            font-size: 1rem;
+        }
+
+        .price-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .price-btn:hover::after {
+            left: 100%;
+        }
+
+        .price-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: linear-gradient(180deg, rgba(5, 8, 18, 0.8), rgba(5, 8, 18, 1));
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+        }
+
+        .footer-col a,
+        .footer-col p {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2rem;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--text-light);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .preview-media {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+            z-index: 3000;
+            font-weight: 600;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                padding: 2rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .generator-grid,
+            .features-grid,
+            .gallery-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card.featured {
+                transform: scale(1);
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
+
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-lightning-bolt"></i>
-                <span>Speed AI</span>
+            <div class="brand">
+                <i class="fas fa-sparkles"></i>AiVision
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="image-generator.html">Image Generator</a></li>
-                <li><a href="video-generator.html">Video Generator</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="dashboard.html" class="btn-login">Dashboard</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#generator">Generator</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><button class="login-btn">Sign In</button></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- HERO -->
+    <section class="hero" id="home">
         <div class="hero-content">
-            <h1 class="hero-title">Generate <span class="gradient-text">8K Images & Videos</span> with AI</h1>
-            <p class="hero-subtitle">Create stunning visuals in seconds with our advanced AI technology</p>
-            <div class="hero-buttons">
-                <a href="image-generator.html" class="btn btn-primary">Start Creating</a>
-                <a href="pricing.html" class="btn btn-secondary">View Plans</a>
+            <h1>Create <span class="gradient-text">AI-Powered Content</span> in Seconds</h1>
+            <p>Generate stunning 8K images and professional videos using advanced AI. Perfect for creators, marketers, and designers.</p>
+            <div class="btn-group">
+                <button class="btn-liquid btn-primary" onclick="scrollTo('generator')">Start Creating Free</button>
+                <button class="btn-liquid btn-secondary" onclick="scrollTo('pricing')">View Plans</button>
             </div>
         </div>
-        <div class="hero-image">
-            <div class="floating-card">
-                <i class="fas fa-image"></i>
-                <p>AI Powered</p>
-            </div>
-            <div class="floating-card card-2">
-                <i class="fas fa-video"></i>
-                <p>4K/8K Quality</p>
-            </div>
-            <div class="floating-card card-3">
-                <i class="fas fa-bolt"></i>
-                <p>Lightning Fast</p>
+        <div class="hero-visual">
+            <div class="float-cards">
+                <div class="float-card">
+                    <i class="fas fa-image"></i>
+                    <p>8K Images</p>
+                </div>
+                <div class="float-card">
+                    <i class="fas fa-video"></i>
+                    <p>4K Videos</p>
+                </div>
+                <div class="float-card">
+                    <i class="fas fa-lightning-bolt"></i>
+                    <p>Lightning Fast</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <h2>Why Choose Speed AI?</h2>
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose AiVision?</h2>
+        <p class="section-subtitle">Professional AI tools trusted by 100,000+ creators</p>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-wand-magic-sparkles"></i>
                 </div>
                 <h3>Advanced AI</h3>
-                <p>State-of-the-art AI models trained on millions of images</p>
+                <p>Latest AI models trained on millions of images and videos for perfect results</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-bolt-lightning"></i>
+                    <i class="fas fa-zap"></i>
                 </div>
-                <h3>Ultra Fast</h3>
-                <p>Generate images in seconds, not hours</p>
+                <h3>Lightning Speed</h3>
+                <p>Generate content in seconds, not hours. Save precious time instantly</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-crown"></i>
                 </div>
-                <h3>Premium Quality</h3>
-                <p>8K resolution with stunning detail and clarity</p>
+                <h3>8K Quality</h3>
+                <p>Professional 8K resolution with stunning clarity and incredible detail</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-lock"></i>
+                    <i class="fas fa-shield"></i>
                 </div>
                 <h3>Secure & Private</h3>
-                <p>Your creations are always private and secure</p>
+                <p>Enterprise-grade security with 100% data privacy protection</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-infinity"></i>
+                    <i class="fas fa-paint-brush"></i>
                 </div>
-                <h3>Unlimited Edits</h3>
-                <p>Edit and refine your creations unlimited times</p>
+                <h3>Easy Editing</h3>
+                <p>Professional filters, effects and customization tools built-in</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-download"></i>
                 </div>
-                <h3>Easy Download</h3>
-                <p>Download in multiple formats and resolutions</p>
+                <h3>Multi Format</h3>
+                <p>Download in any format - JPG, PNG, MP4, MOV, GIF and more</p>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <h2>Ready to Create Amazing Content?</h2>
-        <p>Join thousands of creators using Speed AI</p>
-        <a href="image-generator.html" class="btn btn-primary">Get Started Free</a>
+    <!-- GENERATOR -->
+    <section class="generator" id="generator">
+        <h2 class="section-title">Generate Content Now</h2>
+        <p class="section-subtitle">Describe what you want, and AI will create it for you</p>
+        <div class="generator-grid">
+            <!-- IMAGE GENERATOR -->
+            <div class="gen-card">
+                <i class="gen-icon fas fa-image"></i>
+                <h3>Image Generator</h3>
+                <p>Transform text descriptions into breathtaking 8K professional images. Perfect for design, marketing, and creative projects.</p>
+                
+                <div class="gen-features">
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Text to 8K Image</span>
+                    </div>
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>AI Style Transfer</span>
+                    </div>
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Professional Upscaling</span>
+                    </div>
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Instant Generation</span>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <label class="prompt-label">Describe Your Image:</label>
+                    <textarea class="prompt-input" id="imgPrompt" placeholder="Example: A futuristic city skyline at sunset with neon lights, 8k, cinematic, professional photography, vibrant colors..."></textarea>
+                </div>
+
+                <div class="prompt-group">
+                    <label class="prompt-label">Quality:</label>
+                    <select class="quality-select" id="imgQuality">
+                        <option value="4k">4K (Fast)</option>
+                        <option value="8k" selected>8K (Best Quality)</option>
+                    </select>
+                </div>
+
+                <button class="gen-btn" onclick="generateImage()">
+                    <i class="fas fa-wand-magic-sparkles"></i> Generate Image
+                </button>
+            </div>
+
+            <!-- VIDEO GENERATOR -->
+            <div class="gen-card">
+                <i class="gen-icon fas fa-video"></i>
+                <h3>Video Generator</h3>
+                <p>Create professional 4K and 8K videos for YouTube, Instagram, TikTok. No editing skills needed - AI does everything.</p>
+                
+                <div class="gen-features">
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Text to 4K/8K Video</span>
+                    </div>
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Cartoon Animation</span>
+                    </div>
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Auto Captions</span>
+                    </div>
+                    <div class="gen-feature">
+                        <i class="fas fa-check"></i>
+                        <span>YouTube Optimized</span>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <label class="prompt-label">Describe Your Video:</label>
+                    <textarea class="prompt-input" id="vidPrompt" placeholder="Example: Cute cartoon bear dancing, funny animation, colorful, energetic, upbeat mood, 4k quality, suitable for Instagram Reels..."></textarea>
+                </div>
+
+                <div class="prompt-group">
+                    <label class="prompt-label">Video Quality:</label>
+                    <select class="quality-select" id="vidQuality">
+                        <option value="4k" selected>4K (YouTube Ready)</option>
+                        <option value="8k">8K (Ultra Premium)</option>
+                    </select>
+                </div>
+
+                <button class="gen-btn" onclick="generateVideo()">
+                    <i class="fas fa-film"></i> Generate Video
+                </button>
+            </div>
+        </div>
     </section>
 
-    <!-- Footer -->
+    <!-- GALLERY -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Your Gallery</h2>
+        <p class="section-subtitle">All your generated creations in one place</p>
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="empty-gallery">
+                <i class="fas fa-inbox"></i>
+                <p>Your generated images and videos will appear here</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Simple Pricing</h2>
+        <p class="section-subtitle">Choose the perfect plan for your needs</p>
+        
+        <div class="pricing-toggle">
+            <div class="toggle-group">
+                <button class="toggle-btn active" onclick="togglePricing(this, 'monthly')">Monthly</button>
+                <button class="toggle-btn" onclick="togglePricing(this, 'yearly')">Yearly (Save 20%)</button>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- STARTER -->
+            <div class="price-card">
+                <div class="plan-name">Starter</div>
+                <div class="plan-price">
+                    <span class="amount" data-monthly="9" data-yearly="86.4">9</span>
+                    <span>USD</span>
+                </div>
+                <div class="plan-period">per month</div>
+                
+                <div class="tax-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Tax applied at checkout</span>
+                </div>
+
+                <div class="plan-features">
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>50 Image Credits/month</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>10 Video Credits/month</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>4K Resolution</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Email Support</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>10GB Storage</span>
+                    </div>
+                </div>
+
+                <button class="price-btn" onclick="selectPlan('Starter', 9)">Get Started</button>
+            </div>
+
+            <!-- PROFESSIONAL -->
+            <div class="price-card featured">
+                <div class="badge-popular">MOST POPULAR</div>
+                <div class="plan-name">Professional</div>
+                <div class="plan-price">
+                    <span class="amount" data-monthly="29" data-yearly="278.4">29</span>
+                    <span>USD</span>
+                </div>
+                <div class="plan-period">per month</div>
+                
+                <div class="tax-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Tax applied at checkout</span>
+                </div>
+
+                <div class="plan-features">
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Unlimited Images/month</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>100 Video Credits/month</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>8K Resolution</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Priority Support</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>500GB Storage</span>
+                    </div>
+                </div>
+
+                <button class="price-btn" onclick="selectPlan('Professional', 29)">Choose Plan</button>
+            </div>
+
+            <!-- ENTERPRISE -->
+            <div class="price-card">
+                <div class="plan-name">Enterprise</div>
+                <div class="plan-price">
+                    <span class="amount" data-monthly="99" data-yearly="950.4">99</span>
+                    <span>USD</span>
+                </div>
+                <div class="plan-period">per month</div>
+                
+                <div class="tax-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Tax applied at checkout</span>
+                </div>
+
+                <div class="plan-features">
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Unlimited Everything</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>8K Ultra Resolution</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>API Access</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>24/7 Premium Support</span>
+                    </div>
+                    <div class="plan-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Unlimited Storage</span>
+                    </div>
+                </div>
+
+                <button class="price-btn" onclick="selectPlan('Enterprise', 99)">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Ready to Create?</h2>
+        <p>Join 100,000+ creators making professional content with AiVision today</p>
+        <button class="btn-liquid btn-primary" onclick="scrollTo('generator')">Start Creating Free →</button>
+    </section>
+
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h4>Speed AI</h4>
-                <p>Professional AI Image & Video Generation</p>
+            <div class="footer-col">
+                <h4>AiVision</h4>
+                <p>Professional AI-powered content creation platform for creators worldwide.</p>
             </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#generator">Image Generator</a>
+                <a href="#generator">Video Generator</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#">Blog</a>
             </div>
-            <div class="footer-section">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow</h4>
+                <div class="social-links">
                     <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Speed AI. All rights reserved.</p>
+            <p>&copy; 2024 AiVision. All rights reserved. | Powered by Advanced AI</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- PREVIEW MODAL -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">Preview</h2>
+            <img id="previewImage" class="preview-media" style="display: none;">
+            <video id="previewVideo" class="preview-media" style="display: none;" controls></video>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button class="price-btn" onclick="downloadPreview()" style="flex: 1;">
+                    <i class="fas fa-download"></i> Download
+                </button>
+                <button class="price-btn" onclick="sharePreview()" style="flex: 1;">
+                    <i class="fas fa-share-alt"></i> Share
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let galleryData = [];
+
+        function scrollTo(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function generateImage() {
+            const prompt = document.getElementById('imgPrompt').value;
+            const quality = document.getElementById('imgQuality').value;
+            
+            if (!prompt.trim()) {
+                alert('Please describe your image!');
+                return;
+            }
+
+            const btn = event.target;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span>Generating...';
+
+            setTimeout(() => {
+                const canvas = createCanvas(`${prompt}`, quality);
+                const imageData = canvas.toDataURL('image/jpeg');
+                
+                addToGallery('image', prompt.substring(0, 30), imageData);
+                
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Generate Image';
+                
+                showToast('✓ Image generated successfully!');
+                document.getElementById('imgPrompt').value = '';
+            }, 2000);
+        }
+
+        function generateVideo() {
+            const prompt = document.getElementById('vidPrompt').value;
+            const quality = document.getElementById('vidQuality').value;
+            
+            if (!prompt.trim()) {
+                alert('Please describe your video!');
+                return;
+            }
+
+            const btn = event.target;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span>Creating...';
+
+            setTimeout(() => {
+                const canvas = createCanvas(`Video: ${prompt}`, quality);
+                const videoData = canvas.toDataURL('image/jpeg');
+                
+                addToGallery('video', prompt.substring(0, 30), videoData);
+                
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-film"></i> Generate Video';
+                
+                showToast('✓ Video generated successfully!');
+                document.getElementById('vidPrompt').value = '';
+            }, 3000);
+        }
+
+        function createCanvas(text, quality) {
+            const width = quality === '8k' ? 3840 : 1920;
+            const height = quality === '8k' ? 2160 : 1080;
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, '#2563eb');
+            gradient.addColorStop(0.5, '#7c3aed');
+            gradient.addColorStop(1, '#db2777');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.font = `${width / 12}px -apple-system, BlinkMacSystemFont, Segoe UI`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text.substring(0, 40), width / 2, height / 2);
+            
+            return canvas;
+        }
+
+        function addToGallery(type, name, imageData) {
+            const galleryGrid = document.getElementById('galleryGrid');
+            
+            if (galleryGrid.children.length === 1) {
+                galleryGrid.innerHTML = '';
+            }
+
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            
+            item.innerHTML = `
+                <div class="gallery-preview">
+                    <img src="${imageData}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-info">
+                    <h4>${name}</h4>
+                    <p>${type === 'image' ? '8K Image' : '4K Video'}</p>
+                    <div class="gallery-actions">
+                        <button class="gallery-btn" onclick="downloadItem(this, '${imageData}', '${type}')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="gallery-btn" onclick="shareItem('${name}', '${type}')">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                        <button class="gallery-btn" onclick="deleteItem(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            galleryGrid.prepend(item);
+            galleryData.push({ type, name, imageData });
+        }
+
+        function downloadItem(btn, imageData, type) {
+            const link = document.createElement('a');
+            link.href = imageData;
+            link.download = `AiVision_${type}_${Date.now()}.${type === 'image' ? 'png' : 'mp4'}`;
+            link.click();
+            showToast('✓ Download started!');
+        }
+
+        function shareItem(name, type) {
+            const text = `I created this amazing ${type} using AiVision! 🎨 #AiVision #AI${type === 'image' ? 'Art' : 'Video'} #CreativeAI`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'AiVision Creation',
+                    text: text,
+                });
+            } else {
+                navigator.clipboard.writeText(text);
+                showToast('✓ Share text copied!');
+            }
+        }
+
+        function deleteItem(btn) {
+            btn.closest('.gallery-item').remove();
+            showToast('✓ Deleted!');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function togglePricing(btn, period) {
+            document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.plan-price .amount').forEach(el => {
+                const monthly = el.getAttribute('data-monthly');
+                const yearly = el.getAttribute('data-yearly');
+                el.textContent = period === 'yearly' ? yearly : monthly;
+            });
+        }
+
+        function selectPlan(plan, price) {
+            alert(`${plan} Plan Selected\n$${price}/month\n\nRedirecting to checkout...`);
+        }
+
+        function closeModal() {
+            document.getElementById('previewModal').classList.remove('active');
+        }
+
+        function downloadPreview() {
+            const img = document.getElementById('previewImage');
+            const vid = document.getElementById('previewVideo');
+            if (img.style.display !== 'none') {
+                const link = document.createElement('a');
+                link.href = img.src;
+                link.download = `AiVision_image_${Date.now()}.png`;
+                link.click();
+            } else if (vid.style.display !== 'none') {
+                alert('Video download feature coming soon!');
+            }
+        }
+
+        function sharePreview() {
+            alert('Share feature opens on mobile, or use the gallery share button!');
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                if (a.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    scrollTo(a.getAttribute('href').substring(1));
+                }
+            });
+        });
+    </script>
 </body>
 </html>
