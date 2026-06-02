@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Speed AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-lightning-bolt"></i>
+                <span>Speed AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="image-generator.html">Image Generator</a></li>
+                <li><a href="video-generator.html">Video Generator</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="dashboard.html" class="active btn-login">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <section class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h3>Welcome User!</h3>
+                <p class="user-email">user@speedai.com</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-item active">
+                    <i class="fas fa-chart-line"></i> Overview
+                </a>
+                <a href="#generations" class="nav-item">
+                    <i class="fas fa-images"></i> My Generations
+                </a>
+                <a href="#account" class="nav-item">
+                    <i class="fas fa-user-cog"></i> Account
+                </a>
+                <a href="#subscription" class="nav-item">
+                    <i class="fas fa-credit-card"></i> Subscription
+                </a>
+                <a href="#settings" class="nav-item">
+                    <i class="fas fa-cogs"></i> Settings
+                </a>
+                <a href="#" class="nav-item logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <h2>Dashboard Overview</h2>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #6366f1;">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h4>Images Generated</h4>
+                        <p class="stat-number">234</p>
+                        <span class="stat-info">This month: 45</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #ec4899;">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h4>Videos Created</h4>
+                        <p class="stat-number">12</p>
+                        <span class="stat-info">This month: 5</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #f59e0b;">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h4>Credits Used</h4>
+                        <p class="stat-number">850/1000</p>
+                        <span class="stat-info">85% used</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #10b981;">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4>Plan Expires</h4>
+                        <p class="stat-number">30 Days</p>
+                        <span class="stat-info">Pro Plan</span>
+                    </div>
+                </div>
+
+                <!-- Credit Usage Chart -->
+                <div class="chart-container">
+                    <h3>Credit Usage This Month</h3>
+                    <div class="credit-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%;"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span>850 / 1000 Credits Used</span>
+                            <span>150 Credits Remaining</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="actions-grid">
+                        <a href="image-generator.html" class="action-card">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                            <p>Generate Image</p>
+                        </a>
+                        <a href="video-generator.html" class="action-card">
+                            <i class="fas fa-film"></i>
+                            <p>Create Video</p>
+                        </a>
+                        <a href="#subscription" class="action-card">
+                            <i class="fas fa-plus-circle"></i>
+                            <p>Buy Credits</p>
+                        </a>
+                        <a href="#account" class="action-card">
+                            <i class="fas fa-user-edit"></i>
+                            <p>Edit Profile</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Generations Section -->
+            <section id="generations" class="dashboard-section">
+                <h2>My Generations</h2>
+                <div class="filter-bar">
+                    <select class="filter-select">
+                        <option>All Types</option>
+                        <option>Images Only</option>
+                        <option>Videos Only</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Latest First</option>
+                        <option>Oldest First</option>
+                        <option>Most Liked</option>
+                    </select>
+                </div>
+
+                <div class="generations-grid">
+                    <div class="generation-card">
+                        <div class="generation-image">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="generation-info">
+                            <h4>Beautiful Sunset</h4>
+                            <p class="generation-date">2 hours ago</p>
+                            <p class="generation-prompt">A beautiful sunset over mountains...</p>
+                            <div class="generation-actions">
+                                <button class="action-btn"><i class="fas fa-download"></i></button>
+                                <button class="action-btn"><i class="fas fa-share"></i></button>
+                                <button class="action-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="generation-card">
+                        <div class="generation-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="generation-info">
+                            <h4>Cinematic Flight</h4>
+                            <p class="generation-date">5 hours ago</p>
+                            <p class="generation-prompt">Drone flight over mountains...</p>
+                            <div class="generation-actions">
+                                <button class="action-btn"><i class="fas fa-download"></i></button>
+                                <button class="action-btn"><i class="fas fa-share"></i></button>
+                                <button class="action-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="generation-card">
+                        <div class="generation-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="generation-info">
+                            <h4>Abstract Art</h4>
+                            <p class="generation-date">1 day ago</p>
+                            <p class="generation-prompt">Colorful abstract digital art...</p>
+                            <div class="generation-actions">
+                                <button class="action-btn"><i class="fas fa-download"></i></button>
+                                <button class="action-btn"><i class="fas fa-share"></i></button>
+                                <button class="action-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="generation-card">
+                        <div class="generation-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="generation-info">
+                            <h4>Ocean Waves</h4>
+                            <p class="generation-date">2 days ago</p>
+                            <p class="generation-prompt">Waves crashing on beach at sunrise...</p>
+                            <div class="generation-actions">
+                                <button class="action-btn"><i class="fas fa-download"></i></button>
+                                <button class="action-btn"><i class="fas fa-share"></i></button>
+                                <button class="action-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Account Section -->
+            <section id="account" class="dashboard-section">
+                <h2>Account Settings</h2>
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" value="John Doe" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" value="user@speedai.com" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" value="+1 234 567 8900" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <select class="form-input">
+                            <option>United States</option>
+                            <option>Canada</option>
+                            <option>United Kingdom</option>
+                            <option>India</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+            </section>
+
+            <!-- Subscription Section -->
+            <section id="subscription" class="dashboard-section">
+                <h2>Subscription Management</h2>
+                <div class="subscription-info">
+                    <h3>Current Plan: Professional</h3>
+                    <p>$29/month • Renews on July 2, 2024</p>
+                    <button class="btn btn-secondary">Upgrade Plan</button>
+                    <button class="btn btn-outline">Cancel Subscription</button>
+                </div>
+
+                <div class="billing-history">
+                    <h3>Billing History</h3>
+                    <table class="billing-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>June 2, 2024</td>
+                                <td>Professional Plan</td>
+                                <td>$29.00</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td>May 2, 2024</td>
+                                <td>Professional Plan</td>
+                                <td>$29.00</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td>April 2, 2024</td>
+                                <td>Professional Plan</td>
+                                <td>$29.00</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="dashboard-section">
+                <h2>Preferences</h2>
+                <div class="settings-options">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Email Notifications</h4>
+                            <p>Receive updates about your generations</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Marketing Emails</h4>
+                            <p>Receive news about new features</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Enhance your account security</p>
+                        </div>
+                        <button class="btn btn-secondary">Enable</button>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h4>Change Password</h4>
+                            <p>Update your account password</p>
+                        </div>
+                        <button class="btn btn-secondary">Change</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Speed AI</h4>
+                <p>Professional AI Image & Video Generation</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Speed AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
